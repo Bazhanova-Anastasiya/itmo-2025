@@ -1,0 +1,114 @@
+.background{
+    background-color: #FDF5E6;
+}
+#name_of_website{
+    color:darkred; 
+    text-align: center; 
+    font-family: 'Monotype corsiva'; 
+    font-size: 30px; 
+    padding: 5px; 
+    border: 2px solid #BC8F8F; 
+    width: 95vw; 
+    background-color: #FFE4C4;
+}
+.fixed-button{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    background-color: #f9c985;
+    border: #A0522D;
+}
+.section{
+    display: flex
+}
+.left_section{
+    position: sticky;
+    top: 0;
+}
+.portrait{
+    width: 20vw; 
+    box-sizing: border-box; 
+    padding: 5px;
+}
+.info{
+    text-align: center;
+    line-height: 0.9; 
+    padding:5px; 
+    margin-top: 20px; 
+    width: 20vw; 
+    box-sizing: border-box;
+    border: 2px solid #BC8F8F; 
+    background-color: white;
+}
+.info_attribute{
+    color: #A0522D;
+}
+.center_section{
+    width: 60vw; 
+    padding: 0px 30px 30px 30px; 
+    text-align: justify;
+    max-height: 695px;
+    overflow-y: scroll;  
+}
+#grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    grid-gap: 10px;    
+}
+.item{
+    background-color: #FDF5E6;     
+}
+#bios{
+    color: #A0522D;
+}
+.heading_1{
+    color: #A0522D;
+}
+.bios_text{
+    text-indent: 30px; 
+}
+#books{
+    color: #A0522D;
+    padding-top: 10px;   
+} 
+
+#grid-container2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    grid-gap: 15px;
+    padding-top: 10px;    
+}
+.about_of_jane{
+    font-size: 18px; 
+    text-align: justify;
+}
+.book_annotation{
+    text-align: justify;
+    padding: 20px 20px 20px 20px;
+    border: 2px solid #A0522D; 
+    border-radius: 30px;
+}
+.book_cover{
+    border: 2px solid #900C3F;
+    width: 10vw;     
+}
+.right_section{
+    width: 20vw; 
+    padding: 5px;
+    position: sticky;
+    top: 0; 
+}
+.galery{
+    width:100%;   
+}
+div.info{
+    color: rgb(10, 3, 56);
+}
+li{
+    display: inline;
+    margin-right: 30px;
+    font-size: 24px;
+    color: #A0522D
+}
