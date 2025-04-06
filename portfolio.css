@@ -1,16 +1,32 @@
 .background{
     background-color: #FDF5E6;
+    margin: 0px;
 }
-#name_of_website{
+#name_of_website{    
+    border: 2px solid #BC8F8F; 
+    width: 100%; 
+    background-color: #FFE4C4;
+    margin: 0px;
+    max-height: 10vh;
+}    
+.name{
     color:darkred; 
     text-align: center; 
     font-family: 'Monotype corsiva'; 
     font-size: 30px; 
-    padding: 5px; 
-    border: 2px solid #BC8F8F; 
-    width: 95vw; 
-    background-color: #FFE4C4;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0px;
+    animation: slide 10s ease-in-out 1 alternate backwards;    
 }
+@keyframes slide{
+        0%{
+            transform: translate(0);
+        }
+        100%{
+            transform: translate(100%);
+        }
+}  
 .fixed-button{
     position: fixed;
     bottom: 0px;
@@ -19,23 +35,24 @@
     border: #A0522D;
 }
 .section{
-    display: flex
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
 }
 .left_section{
     position: sticky;
-    top: 0;
+    top: 0;   
+    margin: 0px;
 }
-.portrait{
-    width: 20vw; 
+.portrait{    
     box-sizing: border-box; 
     padding: 5px;
 }
+
 .info{
     text-align: center;
     line-height: 0.9; 
-    padding:5px; 
-    margin-top: 20px; 
-    width: 20vw; 
+    padding: 0px 5px 5px 5px; 
+    margin-top: 10px;      
     box-sizing: border-box;
     border: 2px solid #BC8F8F; 
     background-color: white;
@@ -43,21 +60,23 @@
 .info_attribute{
     color: #A0522D;
 }
-.center_section{
-    width: 60vw; 
-    padding: 0px 30px 30px 30px; 
+.audio{
+    padding-top: 10px;
+}
+.center_section{ 
+    padding: 0px 30px 0px 30px; 
     text-align: justify;
-    max-height: 695px;
-    overflow-y: scroll;  
+    max-height: 90vh;
+    overflow-y: scroll;
+    margin: 0px  
 }
-#grid-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+#container{
+    display: flex;
     text-align: center;
-    grid-gap: 10px;    
+    grid-gap: 5px;
 }
-.item{
-    background-color: #FDF5E6;     
+.item{   
+    width: 33.3%;
 }
 #bios{
     color: #A0522D;
@@ -71,14 +90,13 @@
 #books{
     color: #A0522D;
     padding-top: 10px;   
-} 
-
+}
 #grid-container2{
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: center;
     grid-gap: 15px;
-    padding-top: 10px;    
+    padding-top: 10px;   
 }
 .about_of_jane{
     font-size: 18px; 
@@ -92,23 +110,269 @@
 }
 .book_cover{
     border: 2px solid #900C3F;
-    width: 10vw;     
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    transition: all 3s ease-in 0s;
 }
-.right_section{
-    width: 20vw; 
+.book_cover:hover{
+    transform: scale(1.5);
+    will-change: transform;
+}
+.book_name{
+    text-align: center;
+}
+#feedback{
+    color: #A0522D;
+    padding-top: 10px
+}
+.proposal{
+    font-size: 18px;
+}
+#forms{
+    display:flex; 
+    flex-direction: column; 
+    gap: 10px;  
+    font-size: 18px; 
+    text-align: left;          
+}
+#text{
+    padding: 5px;
+    width: 40%;
+}
+#textarea{
+    padding: 5px;
+    width: 40%;
+}
+#button{
+    width: 20%;
+}
+.right_section{ 
     padding: 5px;
     position: sticky;
-    top: 0; 
+    top: 0;
+    margin: 0px 
 }
 .galery{
-    width:100%;   
+    width:100%;
+    opacity: 1;
+    transition: opacity 5s ease 0s;
 }
+.galery:hover{
+    opacity: 0.2;
+}
+
 div.info{
     color: rgb(10, 3, 56);
 }
-li{
-    display: inline;
-    margin-right: 30px;
-    font-size: 24px;
-    color: #A0522D
+@media (max-width: 576px){
+    .name{
+        animation: none;    
+    }
+    .section{
+        grid-template-columns: 1fr;
+        width: 100%;
+    }    
+    .left_section{
+        position: static;
+        width: 100%;
+        margin: 0px;    
+    }
+    .portrait{    
+        box-sizing: border-box;
+        padding: 5px;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .info{
+        font-size: 20px;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }  
+    .audio{
+        display: none;
+    }
+    .center_section{
+        width: 100%;  
+        margin: 0px;
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 0px;  
+    }     
+    #container{
+        display: grid;
+        grid-template-columns: 1fr;
+        align: center;
+    }
+    #bios{
+        margin-left: 5%;
+    }
+    .item{
+        width: 100%; 
+    }       
+    .heading_1{
+        font-size: 24px;
+        margin-left: 5%;
+    }
+    .bios_text{
+        text-indent: 30px;
+        font-size: 20px;
+        margin: 5%; 
+    }
+    #books{
+        margin-left: 5%;   
+    }
+    .about_of_jane{
+        margin:5%;
+        font-size: 20px;    
+    }
+    #grid-container2{
+        grid-template-columns: 1fr;
+        grid-gap: 5px;
+        margin: 2%;
+    }
+    .book_annotation{
+        font-size: 20px;
+    }
+    .book_cover{
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+        transition: none;
+    }
+    .book_cover:hover{
+        transform: none;
+    }
+    #feedback{
+        margin-left: 5%;
+    }
+    .proposal{
+        font-size: 20px;
+        margin: 5%;
+    }
+    #forms{
+        margin:5%;
+        font-size: 20px;          
+    }
+    #text{
+        width: 100%;
+        font-size: 20px;
+    }
+    #textarea{
+        width: 100%;
+        font-size: 20px;
+    }
+    #button{
+        width: 40%;
+        font-size: 20px;
+    }
+    .right_section{
+        display: none;
+    }            
+}
+@media (min-width: 576px) and (max-width: 992px){
+    .name{
+        animation: none;    
+    }
+    .section{
+        grid-template-columns: 1fr 2fr;
+    }    
+    .left_section{
+        margin: 0px;    
+    }
+    .portrait{    
+        box-sizing: border-box;
+        padding: 5px;
+        width: 90%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .info{
+        font-size: 20px;
+        width: 90%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }  
+    .audio{
+        display: none;
+    }
+    .center_section{
+        width: 100%;  
+        margin: 0px;
+        max-height: 100%;
+        overflow-y: scroll;
+        padding: 0px;  
+    }
+    #container{
+        display: grid;
+        grid-template-columns: 1fr;
+        align: center;
+    }
+    #bios{
+        margin-left: 5%;
+    }
+    .item{
+        width: 100%; 
+    }       
+    .heading_1{
+        font-size: 24px;
+        margin-left: 5%;
+    }
+    .bios_text{
+        text-indent: 30px;
+        font-size: 20px;
+        margin: 5%; 
+    }
+    #books{
+        margin-left: 5%;   
+    }
+    .about_of_jane{
+        margin:5%;
+        font-size: 20px;    
+    }
+    #grid-container2{
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        margin: 2%;
+    }
+    .book_annotation{
+        font-size: 20px;
+    }
+    .book_cover{
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+        transition: none;
+    }
+    .book_cover:hover{
+        transform: none;
+    }
+    #feedback{
+        margin-left: 5%;
+    }
+    .proposal{
+        font-size: 20px;
+        margin: 5%;
+    }
+    #forms{
+        margin:5%;
+        font-size: 20px;          
+    }
+    #text{
+        width: 100%;
+        font-size: 20px;
+    }
+    #textarea{
+        width: 100%;
+        font-size: 20px;
+    }
+    #button{
+        width: 40%;
+        font-size: 20px;
+    }
+    .right_section{
+        display: none;
+    }            
 }
