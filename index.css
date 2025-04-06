@@ -1,0 +1,9 @@
+.list-2 li span{
+    color: green;
+}
+.list span{
+    font-size: 14px;
+}
+ol.list{
+    text-align: center;
+}

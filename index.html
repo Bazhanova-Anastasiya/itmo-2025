@@ -6,7 +6,7 @@
     <title>Our own title</title>
 </head>
 <body>
-    <h1> Hello, world! good </h1>
+    <h1 style="color: rgb(204, 98, 98); font-size: 20px; padding: 10px; margin: 20px; border: 3px solid green"> Hello, world! good </h1>
     <h2> Header level 2</h2>
     <section>
         <div>
@@ -20,14 +20,59 @@
         <li> Item 3</li>
         <li> Item 4</li>
     </ol>
-    <ul>
-        <li> Hi hi </li>
-        <li> Hi Hi </li>
-        <li> Hi Hi </li>
-        <li> Hi Hi </li>
-    </ul>
+  
 
     <img src="https://cdn.culture.ru/images/3bcd077d-2525-5e6f-9320-cf889f825af3" alt="Solntce" width="200" title="Solntse">
+    <ul class="list list-1" >
+        <li>Пункт меню</li>
+        <li><span>Пункт меню</span></li>
+        <li>Пункт меню</li>
+        </ul>
+        <ol class="list list-2">
+        <li>Пункт меню</li>
+        <li><span>Пункт меню</span></li>
+        <li>Пункт меню</li>
+        </ol>
+    <figure>
+        <figcaption>Listen to the T-Rex:</figcaption>
+        <audio controls>
+            <source src="Gordost_i_predubezhdenie.mp3" type="audio/mpeg"> 
+        </audio>
+       
+        <audio controls autoplay> 
+            <source src="Gordost_i_predubezhdenie.mp3" />
+            <p> Ваш браузер не поддерживает формат данного аудиофайла</p>
+        </audio>
+        <form style="display:flex; flex-direction: column; width: 30%; gap: 30px">
+            <div> 
+                <label for="text"> Имя, фамилия </label>
+                <input type="text" id="text" placeholder="Введите имя" required> 
+            </div>
+            <div>
+                <label for="text"> Эл. почта </label>
+                <input type="text" id="text" placeholder="Введите эл. почту" required> 
+            </div>
+            <div>
+                <label for="text"> Телефон </label>
+                <input type="text" id="text" placeholder="Введите номер телефона" required>
+            </div>
+            <div>
+                <label for="text"> Предложения </label>
+            <input type="text" id="text" placeholder="Предложения">  </textarea>
+            </div> 
+            <button> Отправить </button>
 
+        </form>
+        <div class="audio"> 
+            <audio controls autoplay="autoplay">
+                <source src="Gordost_i_predubezhdenie.mp3" type="audio/mpeg"> 
+            </audio>
+        </div> 
+
+        <div class="item"> <h2> <a href="#bios"> Биография </a> </h2> </div>
+        <div class="item"> <h2> <a href="#books"> Творчество </a> </h2> </div>
+        <div class="item"> <h2> <a href="#feedback"> Обратная связь </a> </h2> </div>
+
+    </figure>
 </body>
 </html>
