@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .button-container{
+        display: flex;
+        flex-direction: row;  
+        padding: 10px; 
+        gap: 10px; 
+    }
+    .button{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+    .red{
+        background-color: red;
+    }
+    .green{
+        background-color: green;
+    }
+    .blue{
+        background-color: blue;
+    }
+    .box-container{
+        display: flex;
+        flex-direction: row;  
+        padding: 10px;
+        gap: 10px;   
+    }
+    .box{
+        width: 100px;
+        height: 100px;
+        background-color: grey;
+    }
+</style>
+
+</head>
+<body>
+    <div> Выберите цвет </div>
+    <div class = "button-container">
+        <div class = "button red" style="background-color: red;"> </div>
+        <div class = "button green" style="background-color: green;"> </div>
+        <div class = "button blue" style="background-color: blue;"> </div>    
+    </div>
+      
+    <div> Кликайте на элементы для окрашивания</div>
+    <div class = "box-container">
+        <div class = "box"> </div>
+        <div class = "box"> </div>
+        <div class = "box"> </div> 
+        <div class = "box"> </div>
+        <div class = "box"> </div>   
+    </div>
+    <script>
+        let selectedColor;
+
+        function getColor(){
+            selectedColor = this.style.backgroundColor;
+            console.log(selectedColor)
+        }
+
+        const buttons = document.querySelectorAll(".button")
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", getColor)
+        });
+
+        function setColor(){
+            this.style.backgroundColor = selectedColor
+        }
+
+        const boxes = document.querySelectorAll(".box ")
+   
+        boxes.forEach((box) => {
+            box.addEventListener("click", setColor)
+        });
+
+    </script> 
+</body>
+</html>

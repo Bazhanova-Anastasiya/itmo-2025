@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+Создание игры с нахождением пары одинаковых картинок на поле 4x4 с использованием паттерна MVC в JavaScript — это отличная задача для закрепления знаний. Давайте пошагово разберемся, как можно реализовать такую игру с применением MVC.
+
+### Шаг 1: Структура проекта
+
+Для начала создадим структуру проекта:
+
+```
+/memory-game
+    /index.html
+    /style.css
+    /script.js
+    /model.js
+    /view.js
+    /controller.js
+```
+
+* `index.html` — содержит разметку страницы.
+* `style.css` — стили для игры.
+* `script.js` — инициализация игры.
+* `model.js` — модель данных игры.
+* `view.js` — отображение игры.
+* `controller.js` — логика взаимодействия между моделью и представлением.
+
+### Шаг 2: Реализация модели (`model.js`)
+
+Модель будет отвечать за хранение данных игры, таких как массив карт, состояние игры, счет и т.д.
+
+```javascript
+class MemoryGameModel {
+  constructor() {
+    this.cards = [];
+    this.firstCard = null;
+    this.secondCard = null;
+    this.matchedPairs = 0;
+    this.moves = 0;
+    this.isGameOver = false;
+    this.createCards();
+  }
+
+  // Генерация карт и их перемешивание
+  createCards() {
+    const cardImages = ['img1.png', 'img2.png', 'img3.png', 'img4.png', 'img5.png', 'img6.png', 'img7.png', 'img8.png'];
+    this.cards = [...cardImages, ...cardImages] // Дублируем картинки для пар
+      .map((image, index) => ({ image, id: index, flipped: false, matched: false }))
+      .sort(() => Math.random() - 0.5); // Перемешиваем карты
+  }
+
+  // Проверка на совпадение карт
+  checkMatch() {
+    if (this.firstCard.image === this.secondCard.image) {
+      this.firstCard.matched = true;
+      this.secondCard.matched = true;
+      this.matchedPairs++;
+    } else {
+      setTimeout(() => {
+        this.firstCard.flipped = false;
+        this.secondCard.flipped = false;
+        this.firstCard = null;
+        this.secondCard = null;
+      }, 1000);
+    }
+    this.moves++;
+  }
+
+  // Открытие карты
+  flipCard(card) {
+    if (this.firstCard && this.secondCard) return; // Если оба флипа уже сделаны, ничего не делаем
+
+    card.flipped = true;
+
+    if (!this.firstCard) {
+      this.firstCard = card;
+    } else if (!this.secondCard) {
+      this.secondCard = card;
+      this.checkMatch();
+    }
+  }
+
+  // Проверка завершения игры
+  checkGameOver() {
+    if (this.matchedPairs === 8) {
+      this.isGameOver = true;
+    }
+  }
+}
+```
+
+### Шаг 3: Реализация представления (`view.js`)
+
+Представление будет отвечать за отображение всех элементов игры: поля, карт, счет и т.д.
+
+```javascript
+class MemoryGameView {
+  constructor(model) {
+    this.model = model;
+    this.board = document.querySelector('#game-board');
+    this.movesElement = document.querySelector('#moves');
+    this.gameOverElement = document.querySelector('#game-over');
+  }
+
+  render() {
+    // Очистка поля
+    this.board.innerHTML = '';
+    this.model.cards.forEach(card => {
+      const cardElement = document.createElement('div');
+      cardElement.classList.add('card');
+      cardElement.dataset.id = card.id;
+
+      if (card.flipped || card.matched) {
+        cardElement.style.backgroundImage = `url(${card.image})`;
+      } else {
+        cardElement.style.backgroundImage = 'url(back.png)'; // Задний фон карты
+      }
+
+      cardElement.addEventListener('click', () => this.onCardClick(card));
+
+      this.board.appendChild(cardElement);
+    });
+
+    // Обновление количества ходов
+    this.movesElement.textContent = `Moves: ${this.model.moves}`;
+
+    // Проверка на конец игры
+    if (this.model.isGameOver) {
+      this.gameOverElement.style.display = 'block';
+    } else {
+      this.gameOverElement.style.display = 'none';
+    }
+  }
+
+  onCardClick(card) {
+    if (card.flipped || this.model.isGameOver) return; // Если карта уже открыта или игра завершена
+
+    this.model.flipCard(card);
+    this.render();
+  }
+}
+```
+
+### Шаг 4: Реализация контроллера (`controller.js`)
+
+Контроллер будет связывать модель и представление. Он будет обрабатывать логику взаимодействия между ними.
+
+```javascript
+class MemoryGameController {
+  constructor(model, view) {
+    this.model = model;
+    this.view = view;
+  }
+
+  startGame() {
+    this.view.render();
+  }
+}
+```
+
+### Шаг 5: Интеграция и инициализация игры в `script.js`
+
+В этом файле мы подключим все компоненты и начнем игру.
+
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+  const model = new MemoryGameModel();
+  const view = new MemoryGameView(model);
+  const controller = new MemoryGameController(model, view);
+
+  controller.startGame();
+});
+```
+
+### Шаг 6: HTML-разметка (`index.html`)
+
+Для игры потребуется простая HTML-разметка с контейнером для карт и элементами для отображения счетчика ходов и сообщения о завершении игры.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Memory Game</h1>
+  <div id="game-board"></div>
+  <p id="moves">Moves: 0</p>
+  <div id="game-over" style="display:none;">
+    <h2>Game Over! You won!</h2>
+  </div>
+  <script src="model.js"></script>
+  <script src="view.js"></script>
+  <script src="controller.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+### Шаг 7: Стилизация (`style.css`)
+
+Для игры можно добавить базовые стили.
+
+```css
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 10px;
+  margin: 20px auto;
+  width: 450px;
+}
+
+.card {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+  background-size: cover;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#moves {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#game-over {
+  margin-top: 20px;
+  color: green;
+  font-size: 24px;
+}
+```
+
+### Заключение
+
+Теперь у вас есть основная структура игры с паттерном MVC. Модель управляет данными, представление отображает их, а контроллер связывает их и управляет взаимодействием. Вы можете улучшать игру, добавлять анимации, улучшать логику и стили для более интересного игрового процесса.

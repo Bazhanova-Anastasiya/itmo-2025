@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hometask_2</title>
+</head>
+<style>
+.background{
+    background-color: #a5a2e0;
+    margin: 0px;
+}
+#name_of_website{    
+    width: 100%; 
+    max-height: 10vh;
+} 
+.name{
+    color:rgb(7, 11, 63); 
+    text-align: center; 
+    font-family: 'Monotype corsiva'; 
+    font-size: 50px; 
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0px;
+}
+.section{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+.carousel{
+    width: 90vw;
+    height: 90vw;
+    max-height: 90vh;
+    position: relative;
+    overflow: hidden;
+}
+.carousel-image{
+    position: absolute;
+    width: 100%;
+    opacity: 0; /* по умолчанию изображение невидимо */
+    transition: opacity 3s ease-in-out; /* анимация плавной смены */
+}
+.carousel-image.active{
+    opacity: 1;
+}
+</style>
+
+<body class="background">
+    <div id="name_of_website">
+        <h1 class="name"> Comedy wildlife photography awards 2024 </h1> 
+    </div>
+    <section class="section">
+        <div class="backward">
+            <button onclick="backward()"> Назад </button>
+        </div>
+
+        <div class="carousel">
+            <img src="https://cm.author.today/content/2025/01/13/6d68cab03e1b4b328f3c414365d8259a.jpg" alt="Image 1" class="carousel-image" />
+            <img src="https://www.interfax.ru/aspimg/70408p.jpg" alt="Image 2" class="carousel-image" />
+            <img src="https://s0.rbk.ru/v6_top_pics/media/img/1/84/756704222094841.jpg" alt="Image 3" class="carousel-image" />
+            <img src="https://cdn5.vedomosti.ru/image/2024/9m/yi1ts/original-18pq.jpg"  alt="Image 4" class="carousel-image" />
+            <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1rdbMl.img?w=2160&h=1620&m=4&q=75" alt="Image 5" class="carousel-image" />
+            <img src="https://cdn.fishki.net/upload/post/2024/02/16/4585438/4bf8473ad08f4dfd3aa4c638e2f6686d.jpg" alt="Image 6" class="carousel-image" />
+            <img src="https://balthazar.club/o/uploads/posts/2023-10/1696592644_balthazar-club-p-mir-prirodi-obezyani-instagram-1.jpg" alt="Image 7" class="carousel-image" />
+        </div>
+
+        <div class="forward">
+            <button onclick="forward()"> Вперед </button>
+        </div>
+    </section>    
+
+    <script>
+        const images = document.querySelectorAll('.carousel-image');
+        let currentIndex = 0;
+        
+        function showNextImage() {
+            images[currentIndex].classList.remove('active'); // убираем текущее изображение
+            currentIndex = (currentIndex + 1) % images.length; // переходим к следующему
+            images[currentIndex].classList.add('active'); // показываем следующее изображение
+        }
+
+        // Изначально показываем первое изображение
+        images[currentIndex].classList.add('active');
+        // Меняем изображения каждые 2 секунды
+        const intervalId = setInterval(showNextImage, 3000); 
+        
+        function forward() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+            clearInterval(intervalId);
+        }
+
+        function backward() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = currentIndex - 1 < 0 ? images.length - 1 : (currentIndex - 1) % images.length;
+            images[currentIndex].classList.add('active');
+            clearInterval(intervalId);
+        }
+
+    </script>    
+</body>
+</html>

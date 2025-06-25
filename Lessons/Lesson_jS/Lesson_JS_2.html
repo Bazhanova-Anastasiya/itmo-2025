@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .carousel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-image {
+  width: 100%;
+  display: none; /* Все изображения скрыты по умолчанию */
+}
+
+.carousel-image:first-child {
+  display: block; /* Показываем первое изображение по умолчанию */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+</style>
+<body> 
+  
+  
+    <div id="carousel-container"> </div>
+    
+      
+    
+       <script>
+           const imageArray = [
+      'https://cm.author.today/content/2025/01/13/6d68cab03e1b4b328f3c414365d8259a.jpg',
+      'https://www.interfax.ru/aspimg/70408p.jpg',
+      'https://s0.rbk.ru/v6_top_pics/media/img/1/84/756704222094841.jpg',
+      'https://cdn5.vedomosti.ru/image/2024/9m/yi1ts/original-18pq.jpg',
+      'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1rdbMl.img?w=2160&h=1620&m=4&q=75',
+      'https://cdn.fishki.net/upload/post/2024/02/16/4585438/4bf8473ad08f4dfd3aa4c638e2f6686d.jpg',
+      'https://balthazar.club/o/uploads/posts/2023-10/1696592644_balthazar-club-p-mir-prirodi-obezyani-instagram-1.jpg'
+    ];
+
+    const target = document.getElementById('carouselTarget');
+    createCarousel(imageArray, target);
+
+
+
+
+
+        function createImageCarousel(imageUrls, parentElement) {
+        // Проверим, что родительский элемент существует
+            if (!parentElement) return;
+
+        // Создаём контейнер для карусели
+            const carousel = document.createElement('div');
+             carousel.classList.add('carousel');
+             parentElement.appendChild(carousel);
+
+        // Создадим контейнер для изображений
+            const imagesContainer = document.createElement('div');
+             imagesContainer.classList.add('carousel-images');
+             carousel.appendChild(imagesContainer);
+
+         // Заполняем карусель изображениями
+             imageUrls.forEach((url) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.classList.add('carousel-image');
+                imagesContainer.appendChild(img);
+             });
+
+         // Индекс текущего изображения
+         let currentIndex = 0;
+
+         // Функция для переключения слайдов
+         function showSlide(index) {
+         const images = imagesContainer.querySelectorAll('.carousel-image');
+         if (index < 0) {
+            currentIndex = images.length - 1;
+         } else if (index >= images.length) {
+         currentIndex = 0;
+         } else {
+         currentIndex = index;
+         }
+         images.forEach((img, i) => {
+         img.style.display = i === currentIndex ? 'block' : 'none';
+         });
+         }
+
+         // Переключение слайдов каждые 3 секунды
+         const interval = setInterval(() => {
+         showSlide(currentIndex + 1);
+         }, 3000);
+
+         // Создаём кнопки "вперед" и "назад"
+         const prevButton = document.createElement('button');
+         prevButton.innerHTML = '←';
+         prevButton.classList.add('carousel-button', 'prev');
+         carousel.appendChild(prevButton);
+
+         const nextButton = document.createElement('button');
+         nextButton.innerHTML = '→';
+         nextButton.classList.add('carousel-button', 'next');
+         carousel.appendChild(nextButton);
+
+         // Обработчики для кнопок
+         prevButton.addEventListener('click', () => {
+         showSlide(currentIndex - 1);
+         });
+
+         nextButton.addEventListener('click', () => {
+         showSlide(currentIndex + 1);
+         });
+
+         // Изначально показываем первый слайд
+         showSlide(currentIndex);
+
+         // Остановка интервала при переключении вручную
+         prevButton.addEventListener('click', () => clearInterval(interval));
+         nextButton.addEventListener('click', () => clearInterval(interval));
+        }
+    </script>
+
+
+</body>
+</html>

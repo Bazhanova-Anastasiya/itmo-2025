@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hometask_2</title>
+</head>
+<style>
+  .carousel-container {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0.5em 0.8em;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .carousel-button.prev {
+    left: 10px;
+  }
+
+  .carousel-button.next {
+    right: 10px;
+  }
+</style>
+<script>
+  function createCarousel(images, parentElement) {
+    if (!Array.isArray(images) || images.length === 0 || !parentElement) {
+      console.error('Invalid arguments passed to createCarousel');
+      return;
+    }
+
+    // Создание основной структуры
+    const container = document.createElement('div');
+    container.className = 'carousel-container';
+
+    const track = document.createElement('div');
+    track.className = 'carousel-track';
+
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'carousel-slide';
+      track.appendChild(img);
+    });
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'carousel-button prev';
+    prevBtn.textContent = '⟨';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'carousel-button next';
+    nextBtn.textContent = '⟩';
+
+    container.appendChild(track);
+    container.appendChild(prevBtn);
+    container.appendChild(nextBtn);
+    parentElement.appendChild(container);
+
+    // Функциональность
+    let index = 0;
+    const slideCount = images.length;
+    let intervalId = null;
+
+    function updateSlidePosition() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function showNextSlide() {
+      index = (index + 1) % slideCount;
+      updateSlidePosition();
+    }
+
+    function showPrevSlide() {
+      index = (index - 1 + slideCount) % slideCount;
+      updateSlidePosition();
+    }
+
+    function startAutoSlide() {
+      intervalId = setInterval(showNextSlide, 3000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(intervalId);
+      startAutoSlide();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      showNextSlide();
+      resetAutoSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      showPrevSlide();
+      resetAutoSlide();
+    });
+
+    startAutoSlide();
+  }
+</script>
+
+  <div id="carouselTarget"></div>
+  <script>
+    const imageArray = [
+      'https://cm.author.today/content/2025/01/13/6d68cab03e1b4b328f3c414365d8259a.jpg',
+      'https://www.interfax.ru/aspimg/70408p.jpg',
+      'https://s0.rbk.ru/v6_top_pics/media/img/1/84/756704222094841.jpg',
+      'https://cdn5.vedomosti.ru/image/2024/9m/yi1ts/original-18pq.jpg',
+      'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1rdbMl.img?w=2160&h=1620&m=4&q=75',
+      'https://cdn.fishki.net/upload/post/2024/02/16/4585438/4bf8473ad08f4dfd3aa4c638e2f6686d.jpg',
+      'https://balthazar.club/o/uploads/posts/2023-10/1696592644_balthazar-club-p-mir-prirodi-obezyani-instagram-1.jpg'
+    ];
+
+    const target = document.getElementById('carouselTarget');
+    createCarousel(imageArray, target);
+  </script>
+</body>
